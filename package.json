@@ -19,7 +19,24 @@
         "command": "chat-gpt-vscode-extension.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "chat-gpt-vscode-extension-activitybar",
+          "icon": "resources/icons/icon.png",
+          "title": "GPT-3"
+        }
+      ]
+    },
+    "views": {
+      "chat-gpt-vscode-extension-activitybar": [
+        {
+          "id": "package-dependencies",
+          "name": "Discussions"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
