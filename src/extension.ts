@@ -51,6 +51,16 @@ class GPTViewProvider implements vscode.WebviewViewProvider {
     context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
+    webviewView.webview.options = {
+      // Allow scripts in the webview
+      enableScripts: true,
+      localResourceRoots: [this._extensionUri],
+    };
+
+    const scriptUri = webviewView.webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "resources/js", "view.js")
+    );
+
     webviewView.webview.html = /*html*/ `
 		<!DOCTYPE html>
 		<html lang="en">
@@ -59,9 +69,10 @@ class GPTViewProvider implements vscode.WebviewViewProvider {
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title>Document</title>
-		</head>
-		<body>
-			<h1>Content here</h1>
+			</head>
+			<body>
+			<div id="app"></div>
+			<script src="${scriptUri}"></script>
 		</body>
 		</html>
 		`;
